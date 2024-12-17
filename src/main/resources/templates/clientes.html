@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head><title>Clientes</title></head>
+    <body>
+        <h1>Clientes</h1>
+        <table>
+            <tr><th>Nome</th><th>Email</th></tr>
+            <tr th:each="cliente : ${clientes}">
+                <td th:text="${cliente.nome}"></td>
+                <td th:text="${cliente.email}"></td>
+            </tr>
+        </table>
+        <form action="/cadastrarCliente" method="post">
+            <input type="text" name="nome" placeholder="Nome" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </body>
+</html>

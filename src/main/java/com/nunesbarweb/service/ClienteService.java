@@ -1,13 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.nunesbarweb.service;
 
-/**
- *
- * @author felipe.souza
- */
+import com.nunesbarweb.model.Cliente;
+import com.nunesbarweb.repository.ClienteRepository;
+import java.util.List;
+
 public class ClienteService {
-    
+    private ClienteRepository repository = new ClienteRepository();
+
+    public void cadastrarCliente(String nome, String email) {
+        Cliente cliente = new Cliente(nome, email);
+        repository.salvar(cliente);
+    }
+
+    public List<Cliente> listarClientes() {
+        return repository.listar();
+    }
 }

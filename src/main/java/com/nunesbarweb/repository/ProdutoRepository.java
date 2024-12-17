@@ -1,13 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+// Pacote: repository
 package com.nunesbarweb.repository;
 
-/**
- *
- * @author felipe.souza
- */
+import com.nunesbarweb.model.Produto;
+import java.util.ArrayList;
+import java.util.List;
+
 public class ProdutoRepository {
-    
+    private List<Produto> produtos = new ArrayList<>();
+
+    public void salvar(Produto produto) {
+        produtos.add(produto);
+    }
+
+    public List<Produto> listar() {
+        return produtos;
+    }
 }
