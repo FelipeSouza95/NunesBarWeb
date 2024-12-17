@@ -1,96 +1,103 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nunes Bar</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <!-- Cabeçalho -->
-    <header class="bg-warning py-3">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div>
-                <img src="logo.png" alt="Logo Nunes Bar" style="height: 50px;">
-                <span class="ms-2 fw-bold fs-4">NUNES BAR</span>
-            </div>
-            <nav>
-                <a href="/" class="text-dark fw-bold text-decoration-none mx-3">PAGINA INICIAL</a>
-                <a href="/produtos" class="text-dark fw-bold text-decoration-none mx-3">PRODUTOS</a>
-                <a href="/carrinho" class="text-dark fw-bold text-decoration-none mx-3">CARRINHO</a>
-                <a href="/login" class="text-dark fw-bold text-decoration-none mx-3">LOGIN</a>
-            </nav>
-        </div>
-    </header>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Nunes Bar</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Corpo da Página -->
-    <main class="bg-light py-5">
-        <div class="container text-center">
-            <h1 class="fw-bold mb-3">Venha conhecer nosso Bar</h1>
-            <p class="text-primary fw-bold">As cervejas mais geladas encontra aqui!!!</p>
-
-            <!-- Carrossel -->
-            <div id="categoriasCarrossel" class="carousel slide mb-5" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <a href="/produtos?categoria=bebidas">
-                            <img src="bebidas.jpg" class="d-block w-100" alt="Bebidas">
-                        </a>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>BEBIDAS</h5>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <a href="/produtos?categoria=salgados">
-                            <img src="salgados.jpg" class="d-block w-100" alt="Salgados">
-                        </a>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>SALGADOS</h5>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <a href="/produtos?categoria=doces">
-                            <img src="doces.jpg" class="d-block w-100" alt="Doces">
-                        </a>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>DOCES</h5>
-                        </div>
-                    </div>
+        <!-- Vincula o arquivo CSS externo -->
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <!-- Cabeçalho -->
+        <header class="bg-warning py-3">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div>
+                    <img src="/imagem/logo.png" alt="Logo Nunes Bar" style="height: 50px;">
+                    <span class="ms-2 fw-bold fs-4">NUNES BAR</span>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#categoriasCarrossel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#categoriasCarrossel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
+                <nav>
+                    <a href="/" class="text-dark fw-bold text-decoration-none mx-3">PAGINA INICIAL</a>
+                    <a href="/produtos" class="text-dark fw-bold text-decoration-none mx-3">PRODUTOS</a>
+                    <a href="/carrinho" class="text-dark fw-bold text-decoration-none mx-3">CARRINHO</a>
+                    <a href="/login" class="text-dark fw-bold text-decoration-none mx-3">LOGIN</a>
+                </nav>
             </div>
-        </div>
+        </header>
 
-        <!-- Depoimentos -->
-        <section class="text-center py-4">
-            <h3 class="fw-bold">Depoimentos</h3>
-            <div class="d-flex justify-content-center">
-                <div class="mx-2 bg-secondary p-5 text-white rounded">Depoimento 1</div>
-                <div class="mx-2 bg-secondary p-5 text-white rounded">Depoimento 2</div>
-                <div class="mx-2 bg-secondary p-5 text-white rounded">Depoimento 3</div>
+        <!-- Corpo da Página -->
+        <main class="bg-light py-5">
+            <div class="container text-center">
+                <h1 class="fw-bold mb-3">Venha conhecer nosso Bar</h1>
+                <p class="text-primary fw-bold">As cervejas mais geladas encontra aqui!!!</p>
+
+                <!-- Carrossel com indicadores e setas -->
+                <div id="categoriasCarrossel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#categoriasCarrossel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                        <button type="button" data-bs-target="#categoriasCarrossel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                        <button type="button" data-bs-target="#categoriasCarrossel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <a href="/produtos?categoria=bebidas">
+                                <img src="/imagem/bebida.jpg" class="d-block w-100" alt="Bebidas">
+                            </a>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Bebidas</h5>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="/produtos?categoria=porçoes">
+                                <img src="/imagem/porçao.jpg" class="d-block w-100" alt="Porções">
+                            </a>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Porções</h5>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <a href="/produtos?categoria=doces">
+                                <img src="/imagem/doce.jpg" class="d-block w-100" alt="Doces">
+                            </a>
+                            <div class="carousel-caption d-none d-md-block">
+                                <h5>Doces</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#categoriasCarrossel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#categoriasCarrossel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <!-- Depoimentos -->
+                <section class="text-center py-4">
+                    <h3 class="fw-bold">Depoimentos</h3>
+                    <div class="d-flex justify-content-center">
+                        <div class="mx-2 bg-secondary p-5 text-white rounded">Ambiente ótimo! Bebidas e comidas de ótima qualidade.</div>
+                        <div class="mx-2 bg-secondary p-5 text-white rounded">Local perfeito para relaxar e se divertir com amigos.</div>
+                        <div class="mx-2 bg-secondary p-5 text-white rounded">Ótimo lugar, bom preço e bebidas bem geladas.</div>
+                    </div>
+                </section>
+        </main>
+
+        <!-- Rodapé -->
+        <footer class="bg-dark text-white py-3">
+            <div class="container d-flex justify-content-between align-items-center">
+                <div>
+                    <span class="fw-bold">Acompanhe nossas redes sociais</span>
+                    <a href="#" class="ms-2 text-white"><i class="fab fa-instagram"></i> Instagram</a>
+                    <a href="#" class="ms-2 text-white"><i class="fab fa-facebook"></i> Facebook</a>
+                </div>
+                <div>Contato: ( ) DD *****-****</div>
             </div>
-        </section>
-    </main>
+        </footer>
 
-    <!-- Rodapé -->
-    <footer class="bg-dark text-white py-3">
-        <div class="container d-flex justify-content-between align-items-center">
-            <div>
-                <span class="fw-bold">Acompanhe nossas redes sociais</span>
-                <a href="#" class="ms-2 text-white"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="#" class="ms-2 text-white"><i class="fab fa-facebook"></i> Facebook</a>
-            </div>
-            <div>Contato: ( ) DD *****-****</div>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
 </html>
