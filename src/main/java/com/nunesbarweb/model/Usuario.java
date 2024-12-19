@@ -2,16 +2,16 @@ package com.nunesbarweb.model;
 
 public class Usuario {
 
-    private int idusuario;
+    private int id;
     private String tipo;
     private String senha;
 
     //Gets e Sets
-    public int getIdusuario() {
-        return idusuario;
+    public int getId() {
+        return id;
     }
-    public void setIdusuario(int idusuario) {
-        this.idusuario = idusuario;
+    public void setId(int id) {
+        this.id = id;
     }
     public String getTipo() {
         return tipo;

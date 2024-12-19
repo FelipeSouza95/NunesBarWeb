@@ -2,18 +2,18 @@ package com.nunesbarweb.model;
 
 public class Produto {
 
-    private int idproduo;
+    private int id;
     private String nome;
     private String categoria;
     private double valor;
     private int quantidade;
 
     //Gets e Sets
-    public int getIdproduo() {
-        return idproduo;
+    public int getId() {
+        return id;
     }
-    public void setIdproduo(int idproduo) {
-        this.idproduo = idproduo;
+    public void setId(int id) {
+        this.id = id;
     }
     public String getNome() {
         return nome;

@@ -2,18 +2,18 @@ package com.nunesbarweb.model;
 
 public class Cliente {
 
-    private int idcliente;
+    private int id;
     private String nome;
     private String cpf;
     private String senha;
     private String endereco;
 
     //Gets e Sets
-    public int getIdcliente() {
-        return idcliente;
+    public int getId() {
+        return id;
     }
-    public void setIdcliente(int idcliente) {
-        this.idcliente = idcliente;
+    public void setId(int id) {
+        this.id = id;
     }
     public String getNome() {
         return nome;
@@ -39,5 +39,4 @@ public class Cliente {
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-    
 }
