@@ -18,6 +18,7 @@ public class MainController {
     public String Inicial() {
         return "index";
     }// Método para exibir página Inicial
+    
     @GetMapping("/index")
     public String PaginaInicial() {
         return "index";
