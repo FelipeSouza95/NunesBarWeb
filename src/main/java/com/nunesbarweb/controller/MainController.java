@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.nunesbarweb.model.Cliente; // Importar o modelo Cliente
 import com.nunesbarweb.model.Produto;
 import com.nunesbarweb.service.Tabelas;
 
@@ -17,8 +18,8 @@ public class MainController {
     @GetMapping("/")
     public String Inicial() {
         return "index";
-    }// Método para exibir página Inicial
-    
+    }
+
     @GetMapping("/index")
     public String PaginaInicial() {
         return "index";
@@ -40,10 +41,11 @@ public class MainController {
     // Método para gravar o produto
     @PostMapping("/gravar")
     public String gravarProduto(@ModelAttribute Produto produto) {
-        Tabelas.adicionarProduto(produto); // Adiciona o 
+        Tabelas.adicionarProduto(produto); // Adiciona o produto
         return "redirect:/listarProdutos"; // Redireciona para a página de listagem de produtos
     }
 
+    // Método para exibir a página de login
     @GetMapping("/login")
     public String login() {
         return "login"; // Retorna login.html do diretório templates
@@ -55,15 +57,48 @@ public class MainController {
             @RequestParam("login") String login,
             @RequestParam("senha") String senha,
             Model model) {
+
+        // Verifica se é um administrador
         if ("admin".equals(login) && "admin".equals(senha)) {
             return "redirect:/menuAdmin"; // Redireciona para o menu do administrador
         }
+
+        // Busca cliente pelo CPF e senha
+        for (Cliente cliente : Tabelas.getClientes()) {
+            if (cliente.getCpf().equals(login) && cliente.getSenha().equals(senha)) {
+                return "redirect:/index"; // Redireciona para a página inicial do cliente
+            }
+        }
+
+        // Caso login ou senha sejam inválidos
         model.addAttribute("erro", "Login ou senha inválidos!");
-        return "login"; // Retorna à página de login com erro
+        return "login"; // Retorna à página de login com mensagem de erro
     }
 
+    // Método para exibir o menu do administrador
     @GetMapping("/menuAdmin")
     public String menuAdmin() {
         return "menuAdmin"; // Retorna menuAdmin.html do diretório templates
+    }
+
+    // Método para exibir o formulário de cadastro de cliente
+    @GetMapping("/cadastrar")
+    public String adicionarCliente(Model model) {
+        model.addAttribute("cliente", new Cliente());
+        return "cadastrar"; // Retorna a página para adicionar um cliente
+    }
+
+    // Método para gravar o cliente
+    @PostMapping("/gravarCliente")
+    public String gravarCliente(@ModelAttribute Cliente cliente) {
+        Tabelas.adicionarCliente(cliente); // Adiciona o cliente
+        return "redirect:/listarClientes"; // Redireciona para a página de listagem de clientes
+    }
+
+    // Método para listar os clientes cadastrados
+    @GetMapping("/listarClientes")
+    public String listarClientes(Model model) {
+        model.addAttribute("clientes", Tabelas.getClientes()); // Lista de clientes
+        return "listarClientes"; // Retorna a página de listagem de clientes
     }
 }
