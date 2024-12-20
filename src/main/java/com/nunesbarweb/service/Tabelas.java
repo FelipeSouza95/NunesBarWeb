@@ -19,7 +19,7 @@ public class Tabelas {
         produtos.add(produto);
     }
 
-    public static List<Produto> geProdutos() {
+    public static List<Produto> getProdutos() {
         return produtos;
     }
 
@@ -28,7 +28,7 @@ public class Tabelas {
     }
 
     // Métodos para armazenar e recuperar clientes
-    public static void adicionarCliente(Cliente cliente ) {
+    public static void adicionarCliente(Cliente cliente) {
         cliente.setId(clienteId++);
         clientes.add(cliente);
     }
@@ -40,4 +40,17 @@ public class Tabelas {
     public static Cliente getClienteById(Integer id) {
         return clientes.stream().filter(c -> c.getId() == id).findFirst().orElse(null);
     }
+
+    private static List<Produto> carrinho = new ArrayList<>();
+
+    public static void adicionarAoCarrinho(Produto produto, int quantidade) {
+        for (int i = 0; i < quantidade; i++) {
+            carrinho.add(produto);
+        }
+    }
+
+    public static List<Produto> getCarrinho() {
+        return carrinho;
+    }
+
 }
