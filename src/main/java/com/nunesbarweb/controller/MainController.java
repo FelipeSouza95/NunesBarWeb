@@ -13,9 +13,13 @@ import com.nunesbarweb.service.Tabelas;
 @Controller
 public class MainController {
 
-    // Método para exibir página adicionar Produto
+    // Método para exibir página Inicial
     @GetMapping("/")
     public String Inicial() {
+        return "index";
+    }// Método para exibir página Inicial
+    @GetMapping("/index")
+    public String PaginaInicial() {
         return "index";
     }
 
