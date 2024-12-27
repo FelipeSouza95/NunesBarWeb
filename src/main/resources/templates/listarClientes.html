@@ -25,9 +25,9 @@
         <h1 class="text-center mb-4">Lista de Clientes</h1>
 
         <!-- Campo de pesquisa -->
-        <form method="get" th:action="@{/clientes}" class="mb-4">
+        <form method="get" th:action="@{/clientes/listarClientes}" class="mb-4">
             <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Pesquisar cliente..." aria-label="Pesquisar cliente">
+                <input type="text" name="search" class="form-control" placeholder="Pesquisar cliente..." aria-label="Pesquisar cliente" th:value="${search}">
                 <button type="submit" class="btn btn-primary">Pesquisar</button>
             </div>
         </form>
@@ -64,8 +64,12 @@
                     <td th:text="${cliente.endereco}">Endereço</td>
                     <td>
                         <!-- Botões para alterar ou deletar o cliente -->
-                        <a th:href="@{/alterar/{id}(id=${cliente.id})}" class="btn btn-warning btn-sm">Alterar</a>
-                        <a th:href="@{/deletar/{id}(id=${cliente.id})}" class="btn btn-danger btn-sm">Deletar</a>
+                        <a th:href="@{/clientes/alterar/{id}(id=${cliente.id})}" class="btn btn-warning btn-sm">Alterar</a>
+                    
+                        <!-- Formulário para deletar o cliente -->
+                        <form th:action="@{/clientes/deletar/{id}(id=${cliente.id})}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja deletar este cliente?');">
+                            <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+                        </form>
                     </td>
                 </tr>
             </tbody>
@@ -73,7 +77,7 @@
 
         <!-- Link para adicionar um novo cliente -->
         <div class="text-center mt-4">
-            <a th:href="@{/adicionarCliente}" class="btn btn-success">Adicionar Novo Cliente</a>
+            <a th:href="@{/cadastrar}" class="btn btn-success">Adicionar Novo Cliente</a>
         </div>
     </div>
 
