@@ -27,7 +27,7 @@
         <!-- Campo de pesquisa -->
         <form method="get" th:action="@{/produtos}" class="mb-4">
             <div class="input-group">
-                <input type="text" name="search" class="form-control" placeholder="Pesquisar produto..." aria-label="Pesquisar produto">
+                <input type="text" name="search" class="form-control" placeholder="Pesquisar produto..." aria-label="Pesquisar produto" value="" />
                 <button type="submit" class="btn btn-primary">Pesquisar</button>
             </div>
         </form>
@@ -72,8 +72,13 @@
                     <td th:text="${produto.valor}">Valor</td>
                     <td th:text="${produto.quantidade}">Quantidade</td>
                     <td>
+                        <!-- Link para alterar o produto -->
                         <a th:href="@{/alterar/{id}(id=${produto.id})}" class="btn btn-warning btn-sm">Alterar</a>
-                        <a th:href="@{/deletar/{id}(id=${produto.id})}" class="btn btn-danger btn-sm">Deletar</a>
+
+                        <!-- Link para deletar o produto -->
+                        <form th:action="@{/deletar/{id}(id=${produto.id})}" method="get" style="display:inline;">
+                            <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+                        </form>
                     </td>
                 </tr>
             </tbody>
@@ -81,7 +86,7 @@
 
         <!-- Link para adicionar um novo produto -->
         <div class="text-center mt-4">
-            <a th:href="@{/}" class="btn btn-success">Adicionar Novo Produto</a>
+            <a th:href="@{/adicionar}" class="btn btn-success">Adicionar Novo Produto</a>
         </div>
     </div>
 
