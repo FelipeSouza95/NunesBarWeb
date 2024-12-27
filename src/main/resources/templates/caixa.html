@@ -41,7 +41,7 @@
                     <tr th:each="produto : ${produtos}">
                         <td th:text="${produto.nome}">Produto</td>
                         <td th:text="${produto.categoria}">Categoria</td>
-                        <td th:text="${#numbers.formatDecimal(produto.preco, 2, ',', '.')}">Preço</td>
+                        <td th:text="${produto.preco != null ? #numbers.formatDecimal(produto.preco, 2, ',', '.') : 'Preço Indisponível'}">Preço</td>
                         <td>
                             <input type="number" name="quantidade" min="1" value="1" class="form-control" required>
                         </td>
