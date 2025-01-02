@@ -1,66 +1,82 @@
 <!DOCTYPE html>
-<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caixa - Nunes Bar</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
+    <title>Caixa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <!-- Cabeçalho -->
     <header class="bg-dark text-white py-3">
         <div class="container d-flex justify-content-between align-items-center">
-            <div class="d-flex align-items-center">
-                <img src="/imagem/logo.png" alt="Logo" class="me-2" style="height: 40px;">
-                <h1 class="h4 mb-0">NUNES BAR</h1>
-            </div>
+            <h1 class="h4 mb-0">NUNES BAR - Caixa</h1>
             <nav>
                 <a href="/" class="text-white text-decoration-none mx-2">Página Inicial</a>
-                <a href="/login" class="text-white text-decoration-none mx-2">Login</a>
+                <a href="/carrinho" class="text-white text-decoration-none mx-2">Carrinho</a>
             </nav>
         </div>
     </header>
 
-    <!-- Conteúdo Principal -->
-    <main class="container my-5">
-        <h1 class="text-center">Caixa</h1>
-        <form method="post" th:action="@{/adicionarAoCarrinho}">
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Categoria</th>
-                        <th>Preço</th>
-                        <th>Quantidade</th>
-                        <th>Ação</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Iteração pelos produtos -->
-                    <tr th:each="produto : ${produtos}">
-                        <td th:text="${produto.nome}">Produto</td>
-                        <td th:text="${produto.categoria}">Categoria</td>
-                        <td th:text="${produto.preco != null ? #numbers.formatDecimal(produto.preco, 2, ',', '.') : 'Preço Indisponível'}">Preço</td>
-                        <td>
-                            <input type="number" name="quantidade" min="1" value="1" class="form-control" required>
-                        </td>
-                        <td>
-                            <button type="submit" name="id" th:value="${produto.id}" class="btn btn-primary btn-sm">
-                                Adicionar
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Lista de Produtos</h1>
+
+        <!-- Filtro de pesquisa -->
+        <form method="get" th:action="@{/caixa}" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="search" class="form-control" placeholder="Pesquisar produto..." 
+                       aria-label="Pesquisar produto" th:value="${search}" />
+                <button type="submit" class="btn btn-primary">Pesquisar</button>
+            </div>
         </form>
-    </main>
+
+        <!-- Filtros por categoria -->
+        <div class="mb-4">
+            <form method="get" th:action="@{/caixa}">
+                <button type="submit" name="categoria" value="Bebida" class="btn btn-outline-primary me-2"
+                        th:classappend="${categoria == 'Bebida' ? ' active' : ''}">Bebida</button>
+                <button type="submit" name="categoria" value="Porções" class="btn btn-outline-primary me-2"
+                        th:classappend="${categoria == 'Porções' ? ' active' : ''}">Porções</button>
+                <button type="submit" name="categoria" value="Doces" class="btn btn-outline-primary"
+                        th:classappend="${categoria == 'Doces' ? ' active' : ''}">Doces</button>
+                <!-- Botão para exibir todos os produtos -->
+                <button type="submit" name="categoria" value="" class="btn btn-outline-secondary">Todos</button>
+            </form>
+        </div>
+
+        <!-- Verifica se há produtos -->
+        <div th:if="${#lists.isEmpty(produtos)}">
+            <p class="text-center">Nenhum produto disponível.</p>
+        </div>
+
+        <!-- Lista os produtos -->
+        <div class="row" th:each="produto : ${produtos}">
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${produto.nome}">Produto</h5>
+                        <p class="card-text" th:text="'Categoria: ' + ${produto.categoria}"></p>
+                        <p class="card-text" th:text="'Valor: R$ ' + ${produto.valor}"></p>
+                        <form th:action="@{/adicionarAoCarrinho}" method="post">
+                            <input type="hidden" name="id" th:value="${produto.id}" />
+                            <div class="input-group">
+                                <input type="number" name="quantidade" class="form-control" min="1" value="1" />
+                                <button type="submit" class="btn btn-primary">Adicionar ao Carrinho</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Rodapé -->
     <footer class="bg-dark text-white py-3 mt-4">
         <div class="container text-center">
-            <p class="mb-0">Acompanhe nossas redes sociais | Contato: ( ) DD *****-****</p>
+            <p>&copy; 2025 Nunes Bar</p>
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

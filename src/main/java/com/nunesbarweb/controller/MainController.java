@@ -1,6 +1,5 @@
 package com.nunesbarweb.controller;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -79,13 +78,6 @@ public class MainController {
         return "menuAdmin";
     }
 
-    // Método para exibir o caixa (com lista de produtos)
-    @GetMapping("/caixa")
-    public String exibirCaixa(Model model) {
-        model.addAttribute("produtos", produtoService.obterTodosProdutos());
-        return "caixa";
-    }
-
     // Adiciona produto ao carrinho
     @PostMapping("/adicionarAoCarrinho")
     public String adicionarAoCarrinho(@RequestParam("id") Long id, @RequestParam("quantidade") int quantidade,
@@ -116,8 +108,9 @@ public class MainController {
         Carrinho carrinho = Carrinho.getInstance();
         carrinho.finalizarCompra();
 
+        // Adiciona a mensagem de sucesso para ser exibida na página do caixa
         model.addAttribute("message", "Compra realizada com sucesso!");
-        return "compraFinalizada"; // Redireciona para uma página de finalização de compra
+        return "carrinho";
     }
 
     // Cancela o carrinho

@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ProdutoController {
@@ -15,11 +16,28 @@ public class ProdutoController {
     @Autowired
     private ProdutoService produtoService;
 
-    // Método para listar todos os produtos
-    @GetMapping("/produtos")
-    public String listarProdutos(Model model) {
-        model.addAttribute("produtos", produtoService.obterTodosProdutos());
-        return "listarProdutos"; // Retorna para a página de listagem de produtos
+    // Método único para listar produtos com filtro por nome ou categoria
+    @GetMapping({"/produtos", "/caixa"})
+    public String listarProdutos(@RequestParam(value = "search", required = false) String search,
+                                 @RequestParam(value = "categoria", required = false) String categoria,
+                                 Model model) {
+        // Filtra os produtos por nome, categoria ou mostra todos
+        if (search != null && !search.isEmpty()) {
+            // Filtra os produtos por nome
+            model.addAttribute("produtos", produtoService.buscarPorNome(search));
+            model.addAttribute("search", search); // Passa o valor de pesquisa para a view
+        } else if (categoria != null && !categoria.isEmpty()) {
+            // Filtra os produtos por categoria
+            model.addAttribute("produtos", produtoService.buscarPorCategoria(categoria));
+            model.addAttribute("categoria", categoria); // Passa a categoria para a view
+        } else {
+            // Caso contrário, exibe todos os produtos
+            model.addAttribute("produtos", produtoService.obterTodosProdutos());
+        }
+
+        // Verifica a URL para definir a view retornada
+        String viewName = "produtos".equals(model.getAttribute("viewName")) ? "listarProdutos" : "caixa";
+        return viewName; // Retorna a página correta de acordo com a URL
     }
 
     // Método para excluir um produto
@@ -32,7 +50,6 @@ public class ProdutoController {
     // Método para exibir o formulário de alteração de produto
     @GetMapping("/alterar/{id}")
     public String alterarProduto(@PathVariable Integer id, Model model) {
-        // Recupera o produto pelo ID
         Produto produto = produtoService.obterProdutoPorId(id).orElse(null);
         if (produto == null) {
             return "redirect:/produtos"; // Caso não encontre o produto, redireciona para a lista
