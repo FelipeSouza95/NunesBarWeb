@@ -15,7 +15,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>NunesBarWeb</name>
     <description>Projeto NunesBar</description>
-
+    <packaging>war</packaging>
     <properties>
         <java.version>21</java.version>
     </properties>
@@ -61,8 +61,6 @@
     </dependencies>
 
     <build>
-        <finalName>nunesbarweb</finalName>
-        
         <!-- Configuração do maven-war-plugin para gerar WAR -->
         <plugins>
             <plugin>
@@ -99,5 +97,6 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>${artifactId}</finalName>
     </build>
 </project>
